@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package sistemalibreria;
+import login.*;
 
 /**
  *
@@ -15,6 +16,8 @@ public class SistemaLibreria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        VenLogin login = new VenLogin();
+        login.setVisible(true);
     }
     
 }

@@ -15,6 +15,7 @@ public class VenLogin extends javax.swing.JFrame {
      */
     public VenLogin() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

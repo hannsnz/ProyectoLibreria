@@ -15,6 +15,7 @@ public class Libreria extends javax.swing.JFrame {
      */
     public Libreria() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
