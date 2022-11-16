@@ -1067,7 +1067,7 @@
                                               <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txtNombre" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
+                                                      <Component id="txtNombreCR" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
                                                       <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
@@ -1107,7 +1107,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtNombreCR" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtApellidoP" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtApellidoM" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -1139,7 +1139,7 @@
                                 <Property name="text" type="java.lang.String" value="Nombre/s"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtNombre">
+                            <Component class="javax.swing.JTextField" name="txtNombreCR">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel32">
                               <Properties>
