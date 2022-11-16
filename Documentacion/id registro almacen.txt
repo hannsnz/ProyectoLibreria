@@ -1,0 +1,10 @@
+-----------Almacen---------
+txtCampusR
+txtDirCalleAR
+txtDirNumAR
+txtDirColAR
+txtDirCPAR
+txtDirCiuAR
+txtCorreoAR
+txtNumAR
+btnSubirAR

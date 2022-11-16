@@ -1,0 +1,11 @@
+--------------Autor------------
+txtNombreAR
+txtApePAR
+txtApeMAR
+txtDirCallAR
+txtDirNumAR
+txtDirColAR
+txtDirCPAR
+txtCiudadAR
+txtCorreoAR1
+btnSubirAR1
