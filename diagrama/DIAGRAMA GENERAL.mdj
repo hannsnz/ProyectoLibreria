@@ -4335,13 +4335,30 @@
 											"height": 13,
 											"text": "+autor FK",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGEhsB/qCvhBbw=",
+											"_parent": {
+												"$ref": "AAAAAAGEY5YfDKWtqCw="
+											},
+											"model": {
+												"$ref": "AAAAAAGEhsB/iSveoZk="
+											},
+											"font": "Arial;13;0",
+											"left": 285,
+											"top": 736,
+											"width": 108.748046875,
+											"height": 13,
+											"text": "+cantidad",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 280,
 									"top": 641,
 									"width": 118.748046875,
-									"height": 98
+									"height": 113
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -4354,7 +4371,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 280,
-									"top": 739,
+									"top": 754,
 									"width": 118.748046875,
 									"height": 10
 								},
@@ -6934,6 +6951,14 @@
 							},
 							"name": "autor FK",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGEhsB/iSveoZk=",
+							"_parent": {
+								"$ref": "AAAAAAGEY5YfC6Wlt9o="
+							},
+							"name": "cantidad"
 						}
 					]
 				},
