@@ -79,21 +79,23 @@ create table Ebook (
 
 
 create table Almacen (
-idAlmacen int auto_increment not null,
-dirCalle varchar (250) not null,
-dirNumero int not null,
-dirColonia varchar (250) not null,
-dirCP INT not null,
-dirCiudad varchar (250) not null,
-mail varchar (200) not null,
-telefono int not null,
-campus varchar (60) not null,
-primary key (idAlmacen)
+	idAlmacen int auto_increment not null,
+	dirCalle varchar (250) not null,
+	dirNumero int not null,
+	dirColonia varchar (250) not null,
+	dirCP INT not null,
+	dirCiudad varchar (250) not null,
+	mail varchar (200) not null,
+	telefono int not null,
+	campus varchar (60) not null,
+	primary key (idAlmacen)
 );
 create table Carrito(
-idCarrito int auto_increment not null,
-fechadecompra date not null,
-nombreLibros varchar (225),
-cantidadDelLibro int not null,
-primary key (idCarrito)
+	idCarrito int auto_increment not null,
+	fechadecompra date not null,
+	nombreLibros varchar (225),
+	cantidadDelLibro int not null,
+	primary key (idCarrito)
 );
+
+
