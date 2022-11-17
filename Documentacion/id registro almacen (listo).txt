@@ -1,8 +1,8 @@
 -----------Almacen---------
 txtCampusR
 txtDirCalleAR
-txtDirNumAR
-txtDirColAR
+txtDirNumAR1
+txtDirColAR1
 txtDirCPAR
 txtDirCiuAR
 txtCorreoAR

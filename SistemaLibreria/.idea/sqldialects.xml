@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/login/VenLogin.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/sistema/administracion.java" dialect="MySQL" />
   </component>
 </project>
