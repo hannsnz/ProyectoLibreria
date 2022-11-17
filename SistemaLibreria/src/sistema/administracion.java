@@ -72,6 +72,8 @@ public class administracion extends javax.swing.JFrame {
         btnSubirER = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         cmbDispER = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        txtCantER = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtRevistaR = new javax.swing.JTextField();
@@ -279,10 +281,17 @@ public class administracion extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtDescER);
 
         btnSubirER.setText("Subir");
+        btnSubirER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirERActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Dispositivo: ");
 
         cmbDispER.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computadora", "Telefono", "Tablet" }));
+
+        jLabel14.setText("Cantidad: ");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -319,7 +328,11 @@ public class administracion extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbDispER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbDispER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCantER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -345,7 +358,9 @@ public class administracion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
-                            .addComponent(cmbDispER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbDispER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(txtCantER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubirER)
@@ -428,12 +443,13 @@ public class administracion extends javax.swing.JFrame {
                             .addComponent(txtISBNRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel17)
-                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
@@ -1061,6 +1077,31 @@ public class administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnSubirERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirERActionPerformed
+        // registrar ebooks
+        conexionJV cx = new conexionJV();
+
+        String titulo = txtEbookR.getText();
+        String ISBN0 = txtISBNER.getText();
+        int ISBN = Integer.parseInt(ISBN0);
+        String descripcion = txtDescER.getText();
+        String fecha = txtAPER.getText();
+        String autor = txtAutorER.getText();
+        int idautor = Integer.parseInt(autor);
+        String cantidad0 = txtCantER.getText();
+        int cantidad = Integer.parseInt(cantidad0);
+        String sql = "insert into ebook (titulo,ISBN,fechaPublicacion,descripcion,idAutorE) " +
+                "values('"+titulo+"',"+ISBN+",'"+fecha+"',"+idautor+","+cantidad+")";
+        PreparedStatement ps;
+        try {
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("no se puede registar el libro");
+        }
+    }//GEN-LAST:event_btnSubirERActionPerformed
+
     //metodos puros
     public void tablaAutores(){
         conexionJV cx = new conexionJV();
@@ -1136,6 +1177,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1205,6 +1247,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtAutorER;
     private javax.swing.JTextField txtAutorLR;
     private javax.swing.JTextField txtCampusR;
+    private javax.swing.JTextField txtCantER;
     private javax.swing.JTextField txtCantLR;
     private javax.swing.JTextField txtCiudadAR;
     private javax.swing.JPasswordField txtClaveRegistro;
