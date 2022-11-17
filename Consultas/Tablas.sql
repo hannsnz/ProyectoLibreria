@@ -25,7 +25,7 @@ create table admin (
     primary key (idAdmin),
     foreign key (idAdmin) references usuario(idUsr)
 );
-insert into admin values (2);
+
 
 select idAdmin from admin,usuario where correo = 'admin@proyecto.uv' and clave = 'root' and idAdmin = usuario.idUsr;
 
@@ -59,9 +59,25 @@ titulo varchar (60) not null,
 ISBN int unique not null,
 fechaPublicacion date not null,
 Descripcion varchar (250),
-Numero int not null,
+numero int not null,
 volumen int not null,
+primary key (idRevista)
 );
+create table Ebook (
+idEbook int auto_increment not null,
+titulo varchar (60) not null,
+iSBN int unique not null,
+fechaPublicacion date not null,
+descripcion varchar(250) not null,
+idAutorE int,
+primary key (idEbook),
+foreign key (idAutorE) references autor(idAutor)
+);
+
+create table Almacen (
+idAlmacen int auto_increment not null,
+
+
 
 
 
