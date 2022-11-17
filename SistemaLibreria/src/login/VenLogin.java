@@ -4,6 +4,15 @@
  */
 package login;
 
+import logicos.conexionJV;
+import sistema.Libreria;
+import sistema.administracion;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author 13-bb0502la
@@ -58,6 +67,15 @@ public class VenLogin extends javax.swing.JFrame {
         jLabel2.setText("Ingresa tu contraseña:");
 
         btnIniciar.setText("Iniciar sesión");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btnIniciarActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -119,6 +137,11 @@ public class VenLogin extends javax.swing.JFrame {
         txtClaveRegistro.setText("jPasswordField1");
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -204,6 +227,94 @@ public class VenLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        //conectar a la base de datos
+        conexionJV connect  = new conexionJV();
+        //connect.conectar(); //si conecta a la base;
+        String nombre = txtNombre.getText();
+        String apellidoP = txtApellidoP.getText();
+        String apellidoM = txtApellidoM.getText();
+        String dirCall = txtDirCall.getText();
+        String dirNum1 = txtDirNum.getText();
+        int dirNum = Integer.parseInt(dirNum1);
+        String dirLoc = txtDirLoc.getText();
+        String dirProv = txtDirProv.getText();
+        String correo = txtCorreoRegistro.getText();
+        String clave = new String(txtClaveRegistro.getPassword());
+
+        System.out.println(nombre);
+        System.out.println(apellidoP);
+        System.out.println(apellidoM);
+        System.out.println(dirCall);
+        System.out.println(dirNum);
+        System.out.println(dirLoc);
+        System.out.println(dirProv);
+        System.out.println(correo);
+        System.out.println(clave);
+
+        String insert = "insert into usuario (nombre,apellidoP,apellidoM,dirCall,dirNum,dirLoc,dirProv,correo,clave)";
+        String values = "values ('"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+dirCall+"','"+dirNum+"','"+dirLoc+"','"+dirProv+"','"+correo+"','"+clave+"');";
+
+        String sql = insert+values;
+        PreparedStatement ps;
+
+        try{
+            ps = connect.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("se subieron los datos correctamente");
+            connect.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pudieron subir los datos");
+        }
+
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_btnIniciarActionPerformed
+        // iniciar sesion
+        conexionJV cx = new conexionJV();
+
+        String mail = txtCorreoInicio.getText();
+        String clave = new String(txtClaveInicio.getPassword());
+        String select = "select idUsr,correo,clave from usuario ";
+        String where = "where correo = '"+mail+"' and clave= '"+clave+"'";
+        String sql = select + where;
+        //proceso para ver si existe la cuenta en usuario
+        Statement st;
+        ResultSet rs;
+
+        try{
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()){ //ver si la cuenta es admin
+                int idUsr = rs.getInt("idUsr");
+                Statement st2;
+                ResultSet rs2;
+                String sql2 = "select idAdmin from admin,usuario where correo = '"+mail+"' and clave= '"+clave+"' and idAdmin = "+idUsr;
+                try {
+                    st2 = cx.conectar().createStatement();
+                    rs2 = st2.executeQuery(sql2);
+                    if (rs2.next()){
+                        administracion admin = new administracion();
+                        admin.setVisible(true);
+                    } else {
+                        System.out.println("El usuario no es admin");
+                        Libreria lib = new Libreria();
+                        lib.setVisible(true);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                    System.out.println("No se puede hacer la consulta de admin");
+                }
+            } else {
+                System.out.println("no se encontro nada");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("no se pudo hacer la consulta");
+        }
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     /**
      * @param args the command line arguments
