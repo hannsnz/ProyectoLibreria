@@ -70,6 +70,8 @@ create table Ebook (
     fechaPublicacion date not null,
     descripcion varchar(250) not null,
     idAutorE int,
+    dipositivo varchar(100) not null ,
+    cantidad int not null ,
     primary key (idEbook),
     foreign key (idAutorE) references autor(idAutor)
 );

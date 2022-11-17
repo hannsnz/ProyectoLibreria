@@ -304,7 +304,7 @@ public class administracion extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSubirER, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -322,9 +322,7 @@ public class administracion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtISBNER, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAutorER, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel10))
+                                    .addComponent(txtAutorER, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -332,7 +330,9 @@ public class administracion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCantER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCantER)))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -1090,12 +1090,14 @@ public class administracion extends javax.swing.JFrame {
         int idautor = Integer.parseInt(autor);
         String cantidad0 = txtCantER.getText();
         int cantidad = Integer.parseInt(cantidad0);
-        String sql = "insert into ebook (titulo,ISBN,fechaPublicacion,descripcion,idAutorE) " +
-                "values('"+titulo+"',"+ISBN+",'"+fecha+"',"+idautor+","+cantidad+")";
+        String disp = new String((String) cmbDispER.getSelectedItem());
+        String sql = "insert into ebook (titulo,ISBN,fechaPublicacion,descripcion,dipositivo,idAutorE,cantidad) " +
+                "values('"+titulo+"',"+ISBN+",'"+fecha+"','"+descripcion+"','"+disp+"',"+idautor+","+cantidad+")";
         PreparedStatement ps;
         try {
             ps = cx.conectar().prepareStatement(sql);
             ps.executeUpdate();
+            System.out.println("Se registro el ebook");
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("no se puede registar el libro");
