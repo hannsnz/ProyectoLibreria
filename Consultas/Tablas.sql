@@ -84,12 +84,3 @@ nombreLibros varchar (225),
 cantidadDelLibro int not null,
 primary key (idCarrito)
 );
-
-
-
-
-
-
-
-
-
