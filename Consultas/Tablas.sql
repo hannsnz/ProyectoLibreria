@@ -53,3 +53,16 @@ create table Libro(
     primary key (idLibro),
     foreign key (idAutorL) references autor(idAutor)
 );
+create table Revista(
+idRevista int auto_increment not null,
+titulo varchar (60) not null,
+ISBN int unique not null,
+fechaPublicacion date not null,
+Descripcion varchar (250),
+Numero int not null,
+volumen int not null,
+);
+
+
+
+
