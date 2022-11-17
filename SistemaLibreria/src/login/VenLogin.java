@@ -305,10 +305,10 @@ public class VenLogin extends javax.swing.JFrame {
                     }
                 } catch (SQLException e) {
                     System.out.println(e);
-                    System.out.println("No se puede hacer la consulta de admin");
+                    System.out.println("No se puede hacer la consulta de diferencia de usuario");
                 }
             } else {
-                System.out.println("no se encontro nada");
+                System.out.println("El usuario no se encuentra");
             }
         } catch (SQLException e) {
             System.out.println(e);
