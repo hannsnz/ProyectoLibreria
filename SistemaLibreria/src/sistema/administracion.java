@@ -79,8 +79,6 @@ public class administracion extends javax.swing.JFrame {
         txtISBNRR = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtAPRR = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtAutorRR = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtDescRR = new javax.swing.JTextArea();
@@ -362,8 +360,6 @@ public class administracion extends javax.swing.JFrame {
 
         jLabel13.setText("Año de pulicación: ");
 
-        jLabel14.setText("Autor: ");
-
         jLabel15.setText("Descripción: ");
 
         txtDescRR.setColumns(20);
@@ -397,25 +393,21 @@ public class administracion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
+                                .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel18)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel14))
+                                .addComponent(jLabel12)
+                                .addGap(11, 11, 11)
+                                .addComponent(txtISBNRR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(txtISBNRR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel15))
-                                    .addComponent(txtAutorRR, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -439,12 +431,11 @@ public class administracion extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(txtAutorRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel17)
+                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18)
                             .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
@@ -1044,7 +1035,7 @@ public class administracion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Recargar la tabla
-        co
+        conexionJV cx = new conexionJV();
         int nDatos = datosDBAutor.getRowCount();
         for (int i = 0; i < nDatos; i++) {
             datosDBAutor.removeRow(0);
@@ -1063,6 +1054,7 @@ public class administracion extends javax.swing.JFrame {
                 datosConsulta[3] = rs.getString("correo");
                 datosDBAutor.addRow(datosConsulta);
             }
+            cx.cerrar();
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("No se pueden obtener los autores");
@@ -1091,6 +1083,7 @@ public class administracion extends javax.swing.JFrame {
                 datosConsulta[3] = rs.getString("correo");
                 datosDBAutor.addRow(datosConsulta);
             }
+            cx.cerrar();
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("No se pueden obtener los autores");
@@ -1143,7 +1136,6 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1212,7 +1204,6 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidoP;
     private javax.swing.JTextField txtAutorER;
     private javax.swing.JTextField txtAutorLR;
-    private javax.swing.JTextField txtAutorRR;
     private javax.swing.JTextField txtCampusR;
     private javax.swing.JTextField txtCantLR;
     private javax.swing.JTextField txtCiudadAR;
