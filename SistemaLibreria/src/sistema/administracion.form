@@ -343,6 +343,10 @@
                                                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="cmbDispER" min="-2" pref="140" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtCantER" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -377,6 +381,8 @@
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="cmbDispER" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtCantER" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jScrollPane2" alignment="1" min="-2" pref="102" max="-2" attributes="0"/>
@@ -441,6 +447,9 @@
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Subir"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubirERActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
@@ -460,6 +469,13 @@
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel14">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Cantidad: "/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="txtCantER">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -541,12 +557,14 @@
                                                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txtAPRR" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                                       <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                                                       <Component id="txtNumRR" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txtAPRR" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>

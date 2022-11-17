@@ -54,24 +54,24 @@ create table Libro(
     foreign key (idAutorL) references autor(idAutor)
 );
 create table Revista(
-idRevista int auto_increment not null,
-titulo varchar (60) not null,
-ISBN int unique not null,
-fechaPublicacion date not null,
-Descripcion varchar (250),
-numero int not null,
-volumen int not null,
-primary key (idRevista)
+    idRevista int auto_increment not null,
+    titulo varchar (60) not null,
+    ISBN int unique not null,
+    fechaPublicacion date not null,
+    Descripcion varchar (250),
+    numero int not null,
+    volumen int not null,
+    primary key (idRevista)
 );
 create table Ebook (
-idEbook int auto_increment not null,
-titulo varchar (60) not null,
-iSBN int unique not null,
-fechaPublicacion date not null,
-descripcion varchar(250) not null,
-idAutorE int,
-primary key (idEbook),
-foreign key (idAutorE) references autor(idAutor)
+    idEbook int auto_increment not null,
+    titulo varchar (60) not null,
+    ISBN int unique not null,
+    fechaPublicacion date not null,
+    descripcion varchar(250) not null,
+    idAutorE int,
+    primary key (idEbook),
+    foreign key (idAutorE) references autor(idAutor)
 );
 
 create table Almacen (
