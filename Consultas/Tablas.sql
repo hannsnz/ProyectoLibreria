@@ -61,6 +61,7 @@ create table Revista(
     Descripcion varchar (250),
     numero int not null,
     volumen int not null,
+    cantidad int not null ,
     primary key (idRevista)
 );
 
