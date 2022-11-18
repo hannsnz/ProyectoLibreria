@@ -18,6 +18,11 @@ import java.sql.Statement;
  */
 public class administracion extends javax.swing.JFrame {
     DefaultTableModel datosDBAutor = new DefaultTableModel();
+    DefaultTableModel datosDBLibros = new DefaultTableModel();
+    DefaultTableModel datosDBEbooks = new DefaultTableModel();
+    DefaultTableModel datosDBRevista = new DefaultTableModel();
+    DefaultTableModel datosDBAlmacen = new DefaultTableModel();
+    DefaultTableModel datosDBUsuarios = new DefaultTableModel();
     /**
      * Creates new form administracion
      */
@@ -25,6 +30,11 @@ public class administracion extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         tablaAutores();
+        tablaLibros();
+        tablaEbooks();
+        tablaRevista();
+        tablaAlmacen();
+        tablaUsuarios();
     }
 
     /**
@@ -89,6 +99,8 @@ public class administracion extends javax.swing.JFrame {
         txtNumRR = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         txtVolumenRR = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        txtCantRR = new javax.swing.JTextField();
         pnAlmacen = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         txtCampusR = new javax.swing.JTextField();
@@ -123,11 +135,7 @@ public class administracion extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField32 = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel30 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
+        txtIdAdmin = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -148,12 +156,29 @@ public class administracion extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbLibros = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbEbooks = new javax.swing.JTable();
+        jPanel15 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbRevistas = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tbAlmacenes = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbAutores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbUsuarios = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jInternalFrame1.setVisible(true);
@@ -382,10 +407,17 @@ public class administracion extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txtDescRR);
 
         btnSubirRR.setText("Subir");
+        btnSubirRR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirRRActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("Número: ");
 
         jLabel18.setText("Volumen: ");
+
+        jLabel37.setText("Cantidad: ");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -400,29 +432,35 @@ public class administracion extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRevistaR, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRevistaR, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtAPRR, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(11, 11, 11)
+                                        .addComponent(txtISBNRR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel15))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(11, 11, 11)
-                                .addComponent(txtISBNRR, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel15))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
+                                .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumRR, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCantRR, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -453,7 +491,9 @@ public class administracion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtVolumenRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel37)
+                            .addComponent(txtCantRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubirRR)
                 .addContainerGap(95, Short.MAX_VALUE))
@@ -499,6 +539,11 @@ public class administracion extends javax.swing.JFrame {
         jLabel22.setText("Telefono: ");
 
         btnSubirAR.setText("Subir");
+        btnSubirAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirARActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnAlmacenLayout = new javax.swing.GroupLayout(pnAlmacen);
         pnAlmacen.setLayout(pnAlmacenLayout);
@@ -532,10 +577,10 @@ public class administracion extends javax.swing.JFrame {
                         .addGroup(pnAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSubirAR, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnAlmacenLayout.createSequentialGroup()
-                                .addComponent(txtDirCPAR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDirCPAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDirCiuAR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtDirCiuAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         pnAlmacenLayout.setVerticalGroup(
             pnAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,18 +670,16 @@ public class administracion extends javax.swing.JFrame {
                                 .addComponent(txtDirCallAR, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtDirNumAR, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(pnAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(6, 6, 6)
+                        .addGroup(pnAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSubirAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnAutoresLayout.createSequentialGroup()
-                                .addGap(182, 182, 182)
-                                .addComponent(btnSubirAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnAutoresLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addComponent(txtDirColAR, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDirCPAR, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCiudadAR, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(155, Short.MAX_VALUE))
+                                .addComponent(txtDirCPAR, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCiudadAR, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         pnAutoresLayout.setVerticalGroup(
             pnAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,13 +714,14 @@ public class administracion extends javax.swing.JFrame {
 
         pnRegistros.addTab("Registrar Autor", pnAutores);
 
-        jLabel28.setText("Correo Electronico: ");
+        jLabel28.setText("id de usuario:");
 
-        jLabel29.setText("Clave de acceso: ");
-
-        jLabel30.setText("Nombre de Administrador: ");
-
-        jButton6.setText("Subir");
+        jButton6.setText("Hacer administrador");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -685,22 +729,12 @@ public class administracion extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel29)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPasswordField1))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel30)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField33)))
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,18 +742,9 @@ public class administracion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addContainerGap(93, Short.MAX_VALUE))
+                    .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Administrador", jPanel5);
@@ -747,6 +772,11 @@ public class administracion extends javax.swing.JFrame {
         txtClaveRegistro.setText("jPasswordField1");
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -857,28 +887,172 @@ public class administracion extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Registros", jPanel1);
 
+        tbLibros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(tbLibros);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane5.addTab("Libros", jPanel13);
+
+        tbEbooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(tbEbooks);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane5.addTab("Ebooks", jPanel14);
+
+        tbRevistas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(tbRevistas);
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane5.addTab("Revistas", jPanel15);
+
+        jButton2.setText("Recargar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane5)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Ver Libros", jPanel9);
+
+        tbAlmacenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane8.setViewportView(tbAlmacenes);
+
+        jButton3.setText("Recargar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
 
         jTabbedPane4.addTab("Ver Almacenes", jPanel10);
@@ -923,20 +1097,52 @@ public class administracion extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Ver Autores", jPanel11);
+
+        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane9.setViewportView(tbUsuarios);
+
+        jButton4.setText("Recargar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
 
         jTabbedPane4.addTab("Ver Usuario", jPanel12);
@@ -954,8 +1160,8 @@ public class administracion extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane4)
-                .addContainerGap())
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vistas", jPanel4);
@@ -1104,6 +1310,258 @@ public class administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSubirERActionPerformed
 
+    private void btnSubirRRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirRRActionPerformed
+        // registrar Revistas
+        conexionJV cx = new conexionJV();
+
+        String titulo = txtRevistaR.getText();
+        String ISBN0 = txtISBNRR.getText();
+        int ISBN = Integer.parseInt(ISBN0);
+        String descripcion = txtDescRR.getText();
+        String fecha = txtAPRR.getText();
+        String numero0 = txtNumRR.getText();
+        int numero = Integer.parseInt(numero0);
+        String cantidad0 = txtCantRR.getText();
+        int cantidad = Integer.parseInt(cantidad0);
+        String volumen0 = txtVolumenRR.getText();
+        int vol = Integer.parseInt(volumen0);
+        String sql = "insert into revista (titulo,ISBN,fechaPublicacion,Descripcion,numero,volumen,cantidad) " +
+                "values('"+titulo+"',"+ISBN+",'"+fecha+"','"+descripcion+"',"+numero+","+vol+","+cantidad+")";
+
+        PreparedStatement ps;
+        try{
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("Se registro el libro");
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se puede registrar la revista");
+        }
+    }//GEN-LAST:event_btnSubirRRActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // recargar libros
+        int nDatos = datosDBLibros.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBLibros.removeRow(0);
+        }
+        int nDatos2 = datosDBEbooks.getRowCount();
+        for (int i = 0; i < nDatos2; i++) {
+            datosDBEbooks.removeRow(0);
+        }
+
+        int nDatos3 = datosDBRevista.getRowCount();
+        for (int i = 0; i < nDatos3; i++) {
+            datosDBRevista.removeRow(0);
+        }
+        //mostrar contenido nuevo
+        conexionJV cx = new conexionJV();
+        Statement st;
+        ResultSet rs;
+        String sql = "select idLibro,titulo,ejemplares,nombre,apellidoP from libro,autor where idAutorL=autor.idAutor";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idLibro");
+                datosConsulta[1] = rs.getString("titulo");
+                datosConsulta[2] = rs.getString("ejemplares");
+                datosConsulta[3] = rs.getString("nombre");
+                datosConsulta[3] = rs.getString("apellidoP");
+                datosDBLibros.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los autores");
+        }
+
+        //ebooks
+
+        Statement st2;
+        ResultSet rs2;
+        String sql2 = "select idEbook,titulo,cantidad,nombre,apellidoP from ebook,autor where idAutorE=autor.idAutor";
+        String [] datosConsulta2 = new String[5];
+        try {
+            st2 = cx.conectar().createStatement();
+            rs2 = st2.executeQuery(sql2);
+            while (rs2.next()){
+                datosConsulta2[0] = rs2.getString("idEbook");
+                datosConsulta2[1] = rs2.getString("titulo");
+                datosConsulta2[2] = rs2.getString("cantidad");
+                datosConsulta2[3] = rs2.getString("nombre");
+                datosConsulta2[4] = rs2.getString("apellidoP");
+                datosDBEbooks.addRow(datosConsulta2);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los autores");
+        }
+
+        //revistas
+        Statement st3;
+        ResultSet rs3;
+        String sql3 = "select idRevista,titulo,cantidad from revista";
+        String [] datosConsulta3 = new String[3];
+        try {
+            st3 = cx.conectar().createStatement();
+            rs3 = st3.executeQuery(sql3);
+            while (rs3.next()){
+                datosConsulta3[0] = rs3.getString("idRevista");
+                datosConsulta3[1] = rs3.getString("titulo");
+                datosConsulta3[2] = rs3.getString("cantidad");
+                datosDBRevista.addRow(datosConsulta3);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los autores");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnSubirARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirARActionPerformed
+        // registrar almacen
+        conexionJV cx = new conexionJV();
+
+        String campus = txtCampusR.getText();
+        String dirCalle = txtDirCalleAR.getText();
+        String dirNum0 = txtDirNumAR1.getText();
+        int dirNum = Integer.parseInt(dirNum0);
+        String dirCol = txtDirColAR1.getText();
+        String dirCP0 = txtDirCPAR1.getText();
+        int dirCP = Integer.parseInt(dirCP0);
+        String dirCiudad = txtDirCiuAR1.getText();
+        String mail = txtCorreoAR.getText();
+        String telefono0 = txtNumAR.getText();
+        int telefono = Integer.parseInt(telefono0);
+
+        String sql = "insert into almacen (dirCalle, dirNumero, dirColonia, dirCP, dirCiudad, mail, telefono, campus) " +
+                "values ('"+dirCalle+"',"+dirNum+",'"+dirCol+"',"+dirCP+",'"+dirCiudad+"','"+mail+"',"+telefono+",'"+campus+"')";
+
+        PreparedStatement ps;
+        try {
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("Se registro el almacen");
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se puede registrar el almacen");
+        }
+    }//GEN-LAST:event_btnSubirARActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // recargar la tabla
+        conexionJV cx = new conexionJV();
+
+        int nDatos = datosDBAlmacen.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBAlmacen.removeRow(0);
+        }
+
+        Statement st;
+        ResultSet rs;
+        String sql = "select idAlmacen,campus,mail,telefono,dirCiudad from almacen";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idAlmacen");
+                datosConsulta[1] = rs.getString("campus");
+                datosConsulta[2] = rs.getString("mail");
+                datosConsulta[3] = rs.getString("telefono");
+                datosConsulta[4] = rs.getString("dirCiudad");
+                datosDBAlmacen.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los autores");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        conexionJV cx = new conexionJV();
+
+        int nDatos = datosDBUsuarios.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBUsuarios.removeRow(0);
+        }
+        Statement st;
+        ResultSet rs;
+        String sql = "select idUsr,nombre,apellidoP,correo,clave from usuario";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idUsr");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("apellidoP");
+                datosConsulta[3] = rs.getString("correo");
+                datosConsulta[4] = rs.getString("clave");
+                datosDBUsuarios.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los usuarios");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // registrar usuario basico
+        //conectar a la base de datos
+        conexionJV connect  = new conexionJV();
+        //connect.conectar(); //si conecta a la base;
+        String nombre = txtNombreCR.getText();
+        String apellidoP = txtApellidoP.getText();
+        String apellidoM = txtApellidoM.getText();
+        String dirCall = txtDirCall.getText();
+        String dirNum1 = txtDirNum.getText();
+        int dirNum = Integer.parseInt(dirNum1);
+        String dirLoc = txtDirLoc.getText();
+        String dirProv = txtDirProv.getText();
+        String correo = txtCorreoRegistro.getText();
+        String clave = new String(txtClaveRegistro.getPassword());
+        
+        String insert = "insert into usuario (nombre,apellidoP,apellidoM,dirCall,dirNum,dirLoc,dirProv,correo,clave)";
+        String values = "values ('"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+dirCall+"','"+dirNum+"','"+dirLoc+"','"+dirProv+"','"+correo+"','"+clave+"');";
+
+        String sql = insert+values;
+        PreparedStatement ps;
+
+        try{
+            ps = connect.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("se subieron los datos correctamente");
+            connect.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pudieron subir los datos");
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // convertir a administrador
+        conexionJV cx = new conexionJV();
+        String id0 = txtIdAdmin.getText();
+        int id = Integer.parseInt(id0);
+        String sql = "insert into admin values ("+id+")";
+        PreparedStatement ps;
+        try{
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("Se paso a administrador");
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se puede hacer administrador");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     //metodos puros
     public void tablaAutores(){
         conexionJV cx = new conexionJV();
@@ -1132,6 +1590,153 @@ public class administracion extends javax.swing.JFrame {
             System.out.println("No se pueden obtener los autores");
         }
     }
+
+    public void tablaLibros(){
+        conexionJV cx = new conexionJV();
+        datosDBLibros.addColumn("ID");
+        datosDBLibros.addColumn("Titulo");
+        datosDBLibros.addColumn("Disponibles");
+        datosDBLibros.addColumn("Nombre Autor");
+        datosDBLibros.addColumn("Apellido Autor");
+        tbLibros.setModel(datosDBLibros);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idLibro,titulo,ejemplares,nombre,apellidoP from libro,autor where idAutorL=autor.idAutor";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idLibro");
+                datosConsulta[1] = rs.getString("titulo");
+                datosConsulta[2] = rs.getString("ejemplares");
+                datosConsulta[3] = rs.getString("nombre");
+                datosConsulta[4] = rs.getString("apellidoP");
+                datosDBLibros.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los libros");
+        }
+    }
+
+    public void tablaEbooks(){
+        conexionJV cx = new conexionJV();
+        datosDBEbooks.addColumn("ID");
+        datosDBEbooks.addColumn("Titulo");
+        datosDBEbooks.addColumn("Disponibles");
+        datosDBEbooks.addColumn("Nombre Autor");
+        datosDBEbooks.addColumn("Apellido Autor");
+        tbEbooks.setModel(datosDBEbooks);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idEbook,titulo,cantidad,nombre,apellidoP from ebook,autor where idAutorE=autor.idAutor";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idEbook");
+                datosConsulta[1] = rs.getString("titulo");
+                datosConsulta[2] = rs.getString("cantidad");
+                datosConsulta[3] = rs.getString("nombre");
+                datosConsulta[4] = rs.getString("apellidoP");
+                datosDBEbooks.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los ebooks");
+        }
+    }
+
+    public void tablaRevista(){
+        conexionJV cx = new conexionJV();
+        datosDBRevista.addColumn("ID");
+        datosDBRevista.addColumn("Titulo");
+        datosDBRevista.addColumn("Disponibles");
+        tbRevistas.setModel(datosDBRevista);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idRevista,titulo,cantidad from revista";
+        String [] datosConsulta = new String[3];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idRevista");
+                datosConsulta[1] = rs.getString("titulo");
+                datosConsulta[2] = rs.getString("cantidad");
+                datosDBRevista.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener las revistas");
+        }
+    }
+
+    public void tablaAlmacen(){
+        conexionJV cx = new conexionJV();
+        datosDBAlmacen.addColumn("ID");
+        datosDBAlmacen.addColumn("Campus");
+        datosDBAlmacen.addColumn("Correo");
+        datosDBAlmacen.addColumn("Telefono");
+        datosDBAlmacen.addColumn("Ciudad");
+        tbAlmacenes.setModel(datosDBAlmacen);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idAlmacen,campus,mail,telefono,dirCiudad from almacen";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idAlmacen");
+                datosConsulta[1] = rs.getString("campus");
+                datosConsulta[2] = rs.getString("mail");
+                datosConsulta[3] = rs.getString("telefono");
+                datosConsulta[4] = rs.getString("dirCiudad");
+                datosDBAlmacen.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los almacenes");
+        }
+    }
+
+    public void tablaUsuarios(){
+        conexionJV cx = new conexionJV();
+        datosDBUsuarios.addColumn("ID");
+        datosDBUsuarios.addColumn("Nombre");
+        datosDBUsuarios.addColumn("Apellido Paterno");
+        datosDBUsuarios.addColumn("Correo Electronico");
+        datosDBUsuarios.addColumn("Clave");
+        tbUsuarios.setModel(datosDBUsuarios);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idUsr,nombre,apellidoP,correo,clave from usuario";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idUsr");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("apellidoP");
+                datosConsulta[3] = rs.getString("correo");
+                datosConsulta[4] = rs.getString("clave");
+                datosDBUsuarios.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los usuarios");
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1172,6 +1777,9 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JButton btnSubirRR;
     private javax.swing.JComboBox<String> cmbDispER;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -1195,15 +1803,14 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1214,6 +1821,9 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1222,23 +1832,31 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
+    private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel pnAlmacen;
     private javax.swing.JPanel pnAutores;
     private javax.swing.JPanel pnLibros;
     private javax.swing.JTabbedPane pnRegistros;
     private javax.swing.JPanel pnUsuario;
+    private javax.swing.JTable tbAlmacenes;
     private javax.swing.JTable tbAutores;
+    private javax.swing.JTable tbEbooks;
+    private javax.swing.JTable tbLibros;
+    private javax.swing.JTable tbRevistas;
+    private javax.swing.JTable tbUsuarios;
     private javax.swing.JTextField txtAPER;
     private javax.swing.JTextField txtAPLR;
     private javax.swing.JTextField txtAPRR;
@@ -1251,6 +1869,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtCampusR;
     private javax.swing.JTextField txtCantER;
     private javax.swing.JTextField txtCantLR;
+    private javax.swing.JTextField txtCantRR;
     private javax.swing.JTextField txtCiudadAR;
     private javax.swing.JPasswordField txtClaveRegistro;
     private javax.swing.JTextField txtCorreoAR;
@@ -1276,6 +1895,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtISBNER;
     private javax.swing.JTextField txtISBNLR;
     private javax.swing.JTextField txtISBNRR;
+    private javax.swing.JTextField txtIdAdmin;
     private javax.swing.JTextField txtLibroR;
     private javax.swing.JTextField txtNombreAR;
     private javax.swing.JTextField txtNombreCR;
