@@ -1,0 +1,13 @@
+falta agregar la cantidad que esta en uso de los libros
+
+tambien saber que libros tiene los usuarios
+
+los numeros de telefono deben ser unicos
+
+planear como mostrar los libros que escribo x autor
+
+** creo que puedo reducir los datos de la base de datos pero tendria que reestructura las tablas
+
+crear un proceso automatico que ingrese los libros a los almacenes
+
+modelar la tabla libros para meter la cantidad de libros que queremos poner en el almacen
