@@ -85,6 +85,28 @@ create table Almacen (
 	primary key (idAlmacen)
 );
 
+create table guardarLibro(
+    idA int,
+    idL int,
+    cantidad int,
+    foreign key (idA) references almacen(idAlmacen),
+    foreign key (idL) references libro(idLibro)
+);
+create table guardarEbook(
+    idA int,
+    idE int,
+    cantidad int,
+    foreign key (idA) references almacen(idAlmacen),
+    foreign key (idE) references ebook(idEbook)
+);
+create table guardarRevista(
+    idA int,
+    idR int,
+    cantidad int,
+    foreign key (idA) references almacen(idAlmacen),
+    foreign key (idR) references revista(idRevista)
+);
+
 create table Carrito(
 	idCarrito int auto_increment not null,
 	fechadecompra date not null,

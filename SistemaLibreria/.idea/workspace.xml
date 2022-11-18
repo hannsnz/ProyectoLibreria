@@ -84,7 +84,8 @@
       <workItem from="1668700099361" duration="8124000" />
       <workItem from="1668709150125" duration="4127000" />
       <workItem from="1668720244386" duration="10757000" />
-      <workItem from="1668744107315" duration="6765000" />
+      <workItem from="1668744107315" duration="7210000" />
+      <workItem from="1668795284573" duration="6733000" />
     </task>
     <servers />
   </component>
@@ -101,6 +102,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sistema/administracion.java</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
