@@ -21,6 +21,8 @@ public class administracion extends javax.swing.JFrame {
     DefaultTableModel datosDBLibros = new DefaultTableModel();
     DefaultTableModel datosDBEbooks = new DefaultTableModel();
     DefaultTableModel datosDBRevista = new DefaultTableModel();
+    DefaultTableModel datosDBAlmacen = new DefaultTableModel();
+    DefaultTableModel datosDBUsuarios = new DefaultTableModel();
     /**
      * Creates new form administracion
      */
@@ -31,6 +33,8 @@ public class administracion extends javax.swing.JFrame {
         tablaLibros();
         tablaEbooks();
         tablaRevista();
+        tablaAlmacen();
+        tablaUsuarios();
     }
 
     /**
@@ -131,11 +135,7 @@ public class administracion extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField32 = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel30 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
+        txtIdAdmin = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -168,11 +168,17 @@ public class administracion extends javax.swing.JFrame {
         tbRevistas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tbAlmacenes = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbAutores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbUsuarios = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jInternalFrame1.setVisible(true);
@@ -533,6 +539,11 @@ public class administracion extends javax.swing.JFrame {
         jLabel22.setText("Telefono: ");
 
         btnSubirAR.setText("Subir");
+        btnSubirAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirARActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnAlmacenLayout = new javax.swing.GroupLayout(pnAlmacen);
         pnAlmacen.setLayout(pnAlmacenLayout);
@@ -566,10 +577,10 @@ public class administracion extends javax.swing.JFrame {
                         .addGroup(pnAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSubirAR, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnAlmacenLayout.createSequentialGroup()
-                                .addComponent(txtDirCPAR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDirCPAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDirCiuAR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtDirCiuAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         pnAlmacenLayout.setVerticalGroup(
             pnAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -703,13 +714,14 @@ public class administracion extends javax.swing.JFrame {
 
         pnRegistros.addTab("Registrar Autor", pnAutores);
 
-        jLabel28.setText("Correo Electronico: ");
+        jLabel28.setText("id de usuario:");
 
-        jLabel29.setText("Clave de acceso: ");
-
-        jLabel30.setText("Nombre de Administrador: ");
-
-        jButton6.setText("Subir");
+        jButton6.setText("Hacer administrador");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -717,22 +729,12 @@ public class administracion extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel29)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPasswordField1))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel30)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField33)))
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -740,18 +742,9 @@ public class administracion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
-                .addContainerGap(93, Short.MAX_VALUE))
+                    .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Administrador", jPanel5);
@@ -779,6 +772,11 @@ public class administracion extends javax.swing.JFrame {
         txtClaveRegistro.setText("jPasswordField1");
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1014,15 +1012,47 @@ public class administracion extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Ver Libros", jPanel9);
 
+        tbAlmacenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane8.setViewportView(tbAlmacenes);
+
+        jButton3.setText("Recargar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
 
         jTabbedPane4.addTab("Ver Almacenes", jPanel10);
@@ -1072,15 +1102,47 @@ public class administracion extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Ver Autores", jPanel11);
 
+        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane9.setViewportView(tbUsuarios);
+
+        jButton4.setText("Recargar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
 
         jTabbedPane4.addTab("Ver Usuario", jPanel12);
@@ -1098,7 +1160,7 @@ public class administracion extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1359,6 +1421,147 @@ public class administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnSubirARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirARActionPerformed
+        // registrar almacen
+        conexionJV cx = new conexionJV();
+
+        String campus = txtCampusR.getText();
+        String dirCalle = txtDirCalleAR.getText();
+        String dirNum0 = txtDirNumAR1.getText();
+        int dirNum = Integer.parseInt(dirNum0);
+        String dirCol = txtDirColAR1.getText();
+        String dirCP0 = txtDirCPAR1.getText();
+        int dirCP = Integer.parseInt(dirCP0);
+        String dirCiudad = txtDirCiuAR1.getText();
+        String mail = txtCorreoAR.getText();
+        String telefono0 = txtNumAR.getText();
+        int telefono = Integer.parseInt(telefono0);
+
+        String sql = "insert into almacen (dirCalle, dirNumero, dirColonia, dirCP, dirCiudad, mail, telefono, campus) " +
+                "values ('"+dirCalle+"',"+dirNum+",'"+dirCol+"',"+dirCP+",'"+dirCiudad+"','"+mail+"',"+telefono+",'"+campus+"')";
+
+        PreparedStatement ps;
+        try {
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("Se registro el almacen");
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se puede registrar el almacen");
+        }
+    }//GEN-LAST:event_btnSubirARActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // recargar la tabla
+        conexionJV cx = new conexionJV();
+
+        int nDatos = datosDBAlmacen.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBAlmacen.removeRow(0);
+        }
+
+        Statement st;
+        ResultSet rs;
+        String sql = "select idAlmacen,campus,mail,telefono,dirCiudad from almacen";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idAlmacen");
+                datosConsulta[1] = rs.getString("campus");
+                datosConsulta[2] = rs.getString("mail");
+                datosConsulta[3] = rs.getString("telefono");
+                datosConsulta[4] = rs.getString("dirCiudad");
+                datosDBAlmacen.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los autores");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        conexionJV cx = new conexionJV();
+
+        int nDatos = datosDBUsuarios.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBUsuarios.removeRow(0);
+        }
+        Statement st;
+        ResultSet rs;
+        String sql = "select idUsr,nombre,apellidoP,correo,clave from usuario";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idUsr");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("apellidoP");
+                datosConsulta[3] = rs.getString("correo");
+                datosConsulta[4] = rs.getString("clave");
+                datosDBUsuarios.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los usuarios");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // registrar usuario basico
+        //conectar a la base de datos
+        conexionJV connect  = new conexionJV();
+        //connect.conectar(); //si conecta a la base;
+        String nombre = txtNombreCR.getText();
+        String apellidoP = txtApellidoP.getText();
+        String apellidoM = txtApellidoM.getText();
+        String dirCall = txtDirCall.getText();
+        String dirNum1 = txtDirNum.getText();
+        int dirNum = Integer.parseInt(dirNum1);
+        String dirLoc = txtDirLoc.getText();
+        String dirProv = txtDirProv.getText();
+        String correo = txtCorreoRegistro.getText();
+        String clave = new String(txtClaveRegistro.getPassword());
+        
+        String insert = "insert into usuario (nombre,apellidoP,apellidoM,dirCall,dirNum,dirLoc,dirProv,correo,clave)";
+        String values = "values ('"+nombre+"','"+apellidoP+"','"+apellidoM+"','"+dirCall+"','"+dirNum+"','"+dirLoc+"','"+dirProv+"','"+correo+"','"+clave+"');";
+
+        String sql = insert+values;
+        PreparedStatement ps;
+
+        try{
+            ps = connect.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("se subieron los datos correctamente");
+            connect.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pudieron subir los datos");
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // convertir a administrador
+        conexionJV cx = new conexionJV();
+        String id0 = txtIdAdmin.getText();
+        int id = Integer.parseInt(id0);
+        String sql = "insert into admin values ("+id+")";
+        PreparedStatement ps;
+        try{
+            ps = cx.conectar().prepareStatement(sql);
+            ps.executeUpdate();
+            System.out.println("Se paso a administrador");
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se puede hacer administrador");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     //metodos puros
     public void tablaAutores(){
         conexionJV cx = new conexionJV();
@@ -1414,7 +1617,7 @@ public class administracion extends javax.swing.JFrame {
             cx.cerrar();
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("No se pueden obtener los autores");
+            System.out.println("No se pueden obtener los libros");
         }
     }
 
@@ -1444,7 +1647,7 @@ public class administracion extends javax.swing.JFrame {
             cx.cerrar();
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("No se pueden obtener los autores");
+            System.out.println("No se pueden obtener los ebooks");
         }
     }
 
@@ -1470,7 +1673,67 @@ public class administracion extends javax.swing.JFrame {
             cx.cerrar();
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("No se pueden obtener los autores");
+            System.out.println("No se pueden obtener las revistas");
+        }
+    }
+
+    public void tablaAlmacen(){
+        conexionJV cx = new conexionJV();
+        datosDBAlmacen.addColumn("ID");
+        datosDBAlmacen.addColumn("Campus");
+        datosDBAlmacen.addColumn("Correo");
+        datosDBAlmacen.addColumn("Telefono");
+        datosDBAlmacen.addColumn("Ciudad");
+        tbAlmacenes.setModel(datosDBAlmacen);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idAlmacen,campus,mail,telefono,dirCiudad from almacen";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idAlmacen");
+                datosConsulta[1] = rs.getString("campus");
+                datosConsulta[2] = rs.getString("mail");
+                datosConsulta[3] = rs.getString("telefono");
+                datosConsulta[4] = rs.getString("dirCiudad");
+                datosDBAlmacen.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los almacenes");
+        }
+    }
+
+    public void tablaUsuarios(){
+        conexionJV cx = new conexionJV();
+        datosDBUsuarios.addColumn("ID");
+        datosDBUsuarios.addColumn("Nombre");
+        datosDBUsuarios.addColumn("Apellido Paterno");
+        datosDBUsuarios.addColumn("Correo Electronico");
+        datosDBUsuarios.addColumn("Clave");
+        tbUsuarios.setModel(datosDBUsuarios);
+        Statement st;
+        ResultSet rs;
+        String sql = "select idUsr,nombre,apellidoP,correo,clave from usuario";
+        String [] datosConsulta = new String[5];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("idUsr");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("apellidoP");
+                datosConsulta[3] = rs.getString("correo");
+                datosConsulta[4] = rs.getString("clave");
+                datosDBUsuarios.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los usuarios");
         }
     }
 
@@ -1515,6 +1778,8 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDispER;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -1538,9 +1803,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -1569,7 +1832,6 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1577,22 +1839,24 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
     private javax.swing.JPanel pnAlmacen;
     private javax.swing.JPanel pnAutores;
     private javax.swing.JPanel pnLibros;
     private javax.swing.JTabbedPane pnRegistros;
     private javax.swing.JPanel pnUsuario;
+    private javax.swing.JTable tbAlmacenes;
     private javax.swing.JTable tbAutores;
     private javax.swing.JTable tbEbooks;
     private javax.swing.JTable tbLibros;
     private javax.swing.JTable tbRevistas;
+    private javax.swing.JTable tbUsuarios;
     private javax.swing.JTextField txtAPER;
     private javax.swing.JTextField txtAPLR;
     private javax.swing.JTextField txtAPRR;
@@ -1631,6 +1895,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtISBNER;
     private javax.swing.JTextField txtISBNLR;
     private javax.swing.JTextField txtISBNRR;
+    private javax.swing.JTextField txtIdAdmin;
     private javax.swing.JTextField txtLibroR;
     private javax.swing.JTextField txtNombreAR;
     private javax.swing.JTextField txtNombreCR;

@@ -17,17 +17,11 @@ create table usuario(
   primary key (idUsr)
 );
 
-select correo,clave
-from usuario;
-
 create table admin (
     idAdmin int not null ,
     primary key (idAdmin),
     foreign key (idAdmin) references usuario(idUsr)
 );
-
-
-select idAdmin from admin,usuario where correo = 'admin@proyecto.uv' and clave = 'root' and idAdmin = usuario.idUsr;
 
 create table autor(
     idAutor int not null auto_increment,
@@ -78,7 +72,6 @@ create table Ebook (
     foreign key (idAutorE) references autor(idAutor)
 );
 
-
 create table Almacen (
 	idAlmacen int auto_increment not null,
 	dirCalle varchar (250) not null,
@@ -91,6 +84,7 @@ create table Almacen (
 	campus varchar (60) not null,
 	primary key (idAlmacen)
 );
+
 create table Carrito(
 	idCarrito int auto_increment not null,
 	fechadecompra date not null,
@@ -98,5 +92,3 @@ create table Carrito(
 	cantidadDelLibro int not null,
 	primary key (idCarrito)
 );
-
-
