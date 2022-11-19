@@ -100,6 +100,7 @@ create table guardarEbook(
     foreign key (idA) references almacen(idAlmacen),
     foreign key (idE) references ebook(idEbook)
 );
+
 create table guardarRevista(
     idA int,
     idR int,
@@ -115,6 +116,7 @@ create table Carrito(
 	cantidadDelLibro int not null,
 	primary key (idCarrito)
 );
+
 insert into guardarLibro (idA, idL, cantidad)
 values (3,3,12);
 

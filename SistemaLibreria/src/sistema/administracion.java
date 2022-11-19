@@ -25,6 +25,7 @@ public class administracion extends javax.swing.JFrame {
     DefaultTableModel datosDBAlmacen = new DefaultTableModel();
     DefaultTableModel datosDBUsuarios = new DefaultTableModel();
     DefaultTableModel datosDBLibrosORG = new DefaultTableModel();
+    DefaultTableModel datosDBEbookORG = new DefaultTableModel();
     /**
      * Creates new form administracion
      */
@@ -42,6 +43,7 @@ public class administracion extends javax.swing.JFrame {
         cmbEbookA();
         cmbRevistaA();
         tablaLibrosOrganizador();
+        tablaEbooksOrganizador();
     }
 
     /**
@@ -200,7 +202,7 @@ public class administracion extends javax.swing.JFrame {
         tbAlmacenCampus = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         cmbEbook = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        txtCantCampus2 = new javax.swing.JTextField();
         cmbCampus2 = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -1325,7 +1327,7 @@ public class administracion extends javax.swing.JFrame {
                             .addComponent(jLabel41))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantCampus2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel40))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1349,7 +1351,7 @@ public class administracion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEbook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantCampus2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbCampus2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton9)
@@ -1952,8 +1954,116 @@ public class administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // Actualizar ebooks
+         //ebooks
+        String vacia = txtCantCampus2.getText();
+
+        conexionJV cx = new conexionJV();
+        if (vacia.equals("")){
+            System.out.println("no hay contenido para subir");
+        } else {
+            String titulo = new String((String) cmbEbook.getSelectedItem());
+            String cant = txtCantCampus2.getText();
+            int cantidad = Integer.parseInt(cant);
+            String campus = new String((String) cmbCampus2.getSelectedItem());
+            String sacarIDLibro = "select idEbook from ebook where titulo='"+titulo+"'";
+            String sacarIDAlmacen = "select idAlmacen from almacen where campus='"+campus+"'";
+            int idLibro,idAlmacen;
+            Statement libro,almacen,ejem;
+            ResultSet libroRs,almacenRs,ejemRs;
+            PreparedStatement ps;
+
+            String entra = "select cantidad from ebook where titulo = '"+titulo+"'";
+            try{
+                ejem = cx.conectar().createStatement();
+                ejemRs = ejem.executeQuery(entra);
+                if (ejemRs.next()){
+                    int disp = ejemRs.getInt("cantidad");
+                    if (disp >= cantidad || disp <=cantidad){
+                        try {
+
+                            libro = cx.conectar().createStatement();
+                            libroRs = libro.executeQuery(sacarIDLibro);
+                            if (libroRs.next()){
+                                idLibro = libroRs.getInt("idEbook");
+                                try{
+
+                                    almacen = cx.conectar().createStatement();
+                                    almacenRs = almacen.executeQuery(sacarIDAlmacen);
+                                    if (almacenRs.next()){
+
+                                        idAlmacen = almacenRs.getInt("idAlmacen");
+                                        String sql = "insert into guardarebook (idA, idE, cantidad) values ("+idAlmacen+","+idLibro+","+cantidad+")";
+                                        try{
+
+                                            ps = cx.conectar().prepareStatement(sql);
+                                            ps.executeUpdate();
+
+                                            System.out.println("se insertaron los datos");
+                                            //eliminar la cantidad disponible general
+                                            String update = "update ebook set cantidad = ebook.cantidad -"+cantidad+" where idEbook = "+idLibro;
+                                            PreparedStatement actualizar;
+                                            try {
+                                                actualizar = cx.conectar().prepareStatement(update);
+                                                actualizar.executeUpdate();
+                                                System.out.println("Se restaron los libros");
+                                            } catch (SQLException e) {
+                                                System.out.println(e);
+                                                System.out.println("No se pudieron quitar los libros ejemplares");
+                                            }
+                                        } catch (SQLException e) {
+                                            System.out.println(e);
+                                            System.out.println("No se puede insertar en guardar libro");
+                                        }
+                                    }
+                                } catch (SQLException e) {
+                                    System.out.println(e);
+                                    System.out.println("No se puede sacar el id del almacen");
+                                }
+                            }
+
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                            System.out.println("no se puede obtener el id del libro");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,"La cantidad no se puedes insertar");
+                    }
+                }
+                cx.cerrar();
+            } catch (SQLException e) {
+                System.out.println(e);
+                System.out.println("No se pueden obtener los ejemplares");
+            }
+        }
+
+        // Actualizar Libros
+        txtCantCampus2.setText("");
         cmbEbookA();
+        cmbCampusA();
+        System.out.println("se actualizaron los parametros");
+        int nDatos = datosDBEbookORG.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBEbookORG.removeRow(0);
+        }
+        Statement st;
+        ResultSet rs;
+        String sql = "select titulo,nombre,campus,guardarebook.cantidad from ebook,autor,guardarebook,almacen where ebook.idEbook=guardarebook.idE and idAlmacen=guardarebook.idA and idAutor=ebook.idAutorE";
+        String [] datosConsulta = new String[4];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("titulo");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("campus");
+                datosConsulta[3] = rs.getString("guardarEbook.cantidad");
+                datosDBEbookORG.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los libros organizados");
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -1991,6 +2101,36 @@ public class administracion extends javax.swing.JFrame {
             System.out.println("No se pueden obtener los libros organizados");
         }
     }
+
+    public void tablaEbooksOrganizador(){
+
+        conexionJV cx = new conexionJV();
+        datosDBEbookORG.addColumn("Titulo");
+        datosDBEbookORG.addColumn("Nombre autor");
+        datosDBEbookORG.addColumn("Campus");
+        datosDBEbookORG.addColumn("Disponibles");
+        tbAlmacenCampus1.setModel(datosDBEbookORG);
+        Statement st;
+        ResultSet rs;
+        String sql = "select titulo,nombre,campus,cantidad from libro,autor,guardarebook,almacen where idLibro=guardarebook.idE and idAlmacen=guardarebook.idA and idAutor=libro.idAutorL";
+        String [] datosConsulta = new String[4];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("titulo");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("campus");
+                datosConsulta[3] = rs.getString("cantidad");
+                datosDBEbookORG.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los libros organizados");
+        }
+    }
+
     public void tablaAutores(){
         conexionJV cx = new conexionJV();
         datosDBAutor.addColumn("ID");
@@ -2395,7 +2535,6 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel pnAlmacen;
     private javax.swing.JPanel pnAutores;
@@ -2422,6 +2561,7 @@ public class administracion extends javax.swing.JFrame {
     private javax.swing.JTextField txtAutorLR;
     private javax.swing.JTextField txtCampusR;
     private javax.swing.JTextField txtCantCampus;
+    private javax.swing.JTextField txtCantCampus2;
     private javax.swing.JTextField txtCantER;
     private javax.swing.JTextField txtCantLR;
     private javax.swing.JTextField txtCantRR;
