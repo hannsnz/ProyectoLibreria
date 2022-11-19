@@ -114,3 +114,10 @@ create table Carrito(
 	cantidadDelLibro int not null,
 	primary key (idCarrito)
 );
+insert into guardarLibro (idA, idL, cantidad)
+values (1,2,16);
+
+select titulo,cantidad,nombre from libro,guardarLibro,autor where idLibro=idL and idAutorL=autor.idAutor;
+
+(select idAutor from autor) union (select idAutorL from libro);
+select idLibro from libro where idLibro not in (select idL from guardarLibro);
