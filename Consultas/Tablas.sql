@@ -92,6 +92,7 @@ create table guardarLibro(
     foreign key (idA) references almacen(idAlmacen),
     foreign key (idL) references libro(idLibro)
 );
+
 create table guardarEbook(
     idA int,
     idE int,
@@ -115,9 +116,36 @@ create table Carrito(
 	primary key (idCarrito)
 );
 insert into guardarLibro (idA, idL, cantidad)
-values (1,2,16);
+values (3,3,12);
+
+select idLibro,titulo,ejemplares from libro;
 
 select titulo,cantidad,nombre from libro,guardarLibro,autor where idLibro=idL and idAutorL=autor.idAutor;
 
 (select idAutor from autor) union (select idAutorL from libro);
+
 select idLibro from libro where idLibro not in (select idL from guardarLibro);
+
+select idLibro,titulo from libro where idLibro in (select idL from guardarLibro);
+
+select idUsr,nombre,correo,clave from usuario where idUsr in (select idAdmin from admin);
+
+select titulo from libro inner join autor a on a.idAutor = Libro.idAutorL;
+
+select nombre,apellidoP,apellidoM
+from usuario inner join admin a on usuario.idUsr = a.idAdmin;
+
+select titulo from libro;
+
+select titulo, nombre,cantidad, apellidoP, idLibro, campus
+from libro,
+     autor,
+     guardarLibro,
+     almacen
+where idL = idLibro
+  and idAlmacen = idA
+  and idAutorL = autor.idAutor
+  and campus = 'Redes y Servicios' and cantidad >= 12 and titulo='Ingles basico';
+
+
+select titulo,campus from libro,almacen,guardarLibro where idAlmacen=idA and idLibro=idL;

@@ -24,6 +24,7 @@ public class administracion extends javax.swing.JFrame {
     DefaultTableModel datosDBRevista = new DefaultTableModel();
     DefaultTableModel datosDBAlmacen = new DefaultTableModel();
     DefaultTableModel datosDBUsuarios = new DefaultTableModel();
+    DefaultTableModel datosDBLibrosORG = new DefaultTableModel();
     /**
      * Creates new form administracion
      */
@@ -40,6 +41,7 @@ public class administracion extends javax.swing.JFrame {
         cmbCampusA();
         cmbEbookA();
         cmbRevistaA();
+        tablaLibrosOrganizador();
     }
 
     /**
@@ -1837,9 +1839,116 @@ public class administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         //seguir avanzando
+        String vacia = txtCantCampus.getText();
+        conexionJV cx = new conexionJV();
+        if (vacia != "" && vacia!=" " && vacia != "0"){
+
+            String titulo = new String((String) cmbLibro.getSelectedItem());
+            String cant = txtCantCampus.getText();
+            int cantidad = Integer.parseInt(cant);
+            String campus = new String((String) cmbCampus.getSelectedItem());
+            String sacarIDLibro = "select idLibro from libro where titulo='"+titulo+"'";
+            String sacarIDAlmacen = "select idAlmacen from almacen where campus='"+campus+"'";
+            int idLibro,idAlmacen;
+            Statement libro,almacen,ejem;
+            ResultSet libroRs,almacenRs,ejemRs;
+            PreparedStatement ps;
+
+            String entra = "select ejemplares from libro where titulo = '"+titulo+"'";
+            try{
+                ejem = cx.conectar().createStatement();
+                ejemRs = ejem.executeQuery(entra);
+                if (ejemRs.next()){
+                    int disp = ejemRs.getInt("ejemplares");
+                    if (disp >= cantidad || disp <=cantidad){
+                        try {
+
+                            libro = cx.conectar().createStatement();
+                            libroRs = libro.executeQuery(sacarIDLibro);
+                            if (libroRs.next()){
+                                idLibro = libroRs.getInt("idLibro");
+                                try{
+
+                                    almacen = cx.conectar().createStatement();
+                                    almacenRs = almacen.executeQuery(sacarIDAlmacen);
+                                    if (almacenRs.next()){
+
+                                        idAlmacen = almacenRs.getInt("idAlmacen");
+                                        String sql = "insert into guardarlibro (idA, idL, cantidad) values ("+idAlmacen+","+idLibro+","+cantidad+")";
+                                        try{
+
+                                            ps = cx.conectar().prepareStatement(sql);
+                                            ps.executeUpdate();
+
+                                            System.out.println("se insertaron los datos");
+                                            //eliminar la cantidad disponible general
+                                            String update = "update libro set ejemplares = ejemplares -"+cantidad+" where idLibro = "+idLibro;
+                                            PreparedStatement actualizar;
+                                            try {
+                                                actualizar = cx.conectar().prepareStatement(update);
+                                                actualizar.executeUpdate();
+                                                System.out.println("Se restaron los libros");
+                                            } catch (SQLException e) {
+                                                System.out.println(e);
+                                                System.out.println("No se pudieron quitar los libros ejemplares");
+                                            }
+                                        } catch (SQLException e) {
+                                            System.out.println(e);
+                                            System.out.println("No se puede insertar en guardar libro");
+                                        }
+                                    }
+                                } catch (SQLException e) {
+                                    System.out.println(e);
+                                    System.out.println("No se puede sacar el id del almacen");
+                                }
+                            }
+
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                            System.out.println("no se puede obtener el id del libro");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,"La cantidad no se puedes insertar");
+                    }
+                }
+                cx.cerrar();
+            } catch (SQLException e) {
+                System.out.println(e);
+                System.out.println("No se pueden obtener los ejemplares");
+            }
+
+        }
+
         // Actualizar Libros
+        txtCantCampus.setText("");
         cmbLibroA();
-        cmbCampusA(); //seguir avanzando
+        cmbCampusA();
+        System.out.println("se actualizaron los parametros");
+        int nDatos = datosDBLibrosORG.getRowCount();
+        for (int i = 0; i < nDatos; i++) {
+            datosDBLibrosORG.removeRow(0);
+        }
+        Statement st;
+        ResultSet rs;
+        String sql = "select titulo,nombre,campus,cantidad from libro,autor,guardarlibro,almacen where idLibro=guardarlibro.idL and idAlmacen=guardarlibro.idA and idAutor=libro.idAutorL";
+        String [] datosConsulta = new String[4];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("titulo");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("campus");
+                datosConsulta[3] = rs.getString("cantidad");
+                datosDBLibrosORG.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los libros organizados");
+        }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1853,6 +1962,35 @@ public class administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     //metodos puros
+
+    public void tablaLibrosOrganizador(){
+
+        conexionJV cx = new conexionJV();
+        datosDBLibrosORG.addColumn("Titulo");
+        datosDBLibrosORG.addColumn("Nombre autor");
+        datosDBLibrosORG.addColumn("Campus");
+        datosDBLibrosORG.addColumn("Disponibles");
+        tbAlmacenCampus.setModel(datosDBLibrosORG);
+        Statement st;
+        ResultSet rs;
+        String sql = "select titulo,nombre,campus,cantidad from libro,autor,guardarlibro,almacen where idLibro=guardarlibro.idL and idAlmacen=guardarlibro.idA and idAutor=libro.idAutorL";
+        String [] datosConsulta = new String[4];
+        try {
+            st = cx.conectar().createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()){
+                datosConsulta[0] = rs.getString("titulo");
+                datosConsulta[1] = rs.getString("nombre");
+                datosConsulta[2] = rs.getString("campus");
+                datosConsulta[3] = rs.getString("cantidad");
+                datosDBLibrosORG.addRow(datosConsulta);
+            }
+            cx.cerrar();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("No se pueden obtener los libros organizados");
+        }
+    }
     public void tablaAutores(){
         conexionJV cx = new conexionJV();
         datosDBAutor.addColumn("ID");
