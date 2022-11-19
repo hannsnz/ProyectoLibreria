@@ -1839,37 +1839,7 @@ public class administracion extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Actualizar Libros
         cmbLibroA();
-        //ver si la cantidad ingresasa es valida
-
-        if (txtCantCampus.getText() != ""){
-            conexionJV cx = new conexionJV();
-            String cantidad0 = txtCantCampus.getText();
-            int cantidad = Integer.parseInt(cantidad0);
-
-            String titulo = new String((String) cmbLibro.getSelectedItem());
-            Statement st;
-            ResultSet rs;
-
-            String sql = "select ejemplares from libro where titulo ='"+titulo+"'";
-
-            try{
-                st = cx.conectar().createStatement();
-                rs = st.executeQuery(sql);
-                if (rs.next()){
-                    int confirmar = rs.getInt("ejemplares");
-                    if (cantidad < confirmar || cantidad > confirmar){
-                        JOptionPane.showMessageDialog(null,"No se puede ingresar la cantidad");
-                    } else {
-                        JOptionPane.showMessageDialog(null,"La cantidad se establecio correctamente");
-                    }
-                }
-                cx.cerrar();
-            } catch (SQLException e) {
-                System.out.println(e);
-                System.out.println("No se puede obtener la cantidad");
-
-            }
-        }
+        cmbCampusA(); //seguir avanzando
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
