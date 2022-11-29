@@ -117,8 +117,7 @@ create table Carrito(
 	primary key (idCarrito)
 );
 
-insert into guardarLibro (idA, idL, cantidad)
-values (3,3,12);
+insert into guardarLibro (idA, idL, cantidad) values (3,3,12);
 
 select idLibro,titulo,ejemplares from libro;
 
@@ -151,3 +150,24 @@ where idL = idLibro
 
 
 select titulo,campus from libro,almacen,guardarLibro where idAlmacen=idA and idLibro=idL;
+
+#ver el libro junto con su autor
+select titulo, nombre,apellidoP,apellidoM from libro,autor where idAutorL = idAutor;
+
+#ver cuantos usuarios son de cada localidad
+select dirLoc, count(dirLoc) from usuario group by dirLoc;
+
+#ver todos los libros y todos los ebooks
+(select titulo from libro) union (select titulo from ebook);
+
+#ver los que son impresos y no son digitales
+select titulo as Libros from libro where titulo not in (select titulo from ebook);
+select * from libro;
+select titulo as Libros from libro where titulo in (select titulo from ebook);
+select * from libro;
+
+#todos los libros que en su descripcion tengan la palabra prog
+select titulo,descripcion from libro where instr(descripcion,'prog');
+select titulo,descripcion from libro where descripcion like 'prog';
+select titulo,descripcion from libro;
+
