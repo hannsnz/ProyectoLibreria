@@ -9,8 +9,9 @@ public class conexionJV {
     public Connection conectar() throws SQLException {
         String db = "proyectoDB";
         String usuario = "admin";
-        String passwd = "EquipoRSCO31";
-        String url = "jdbc:mysql://2806:2f0:7080:925e:5028:d8ac:c4b7:c519:3306/proyectoDB";
+        String passwd = "passwdRSCO31";
+        String url = "jdbc:mysql://localhost:3306/proyectoDB";
+        //172.22.144.1
         try{
             cx= DriverManager.getConnection(url,usuario,passwd);
 
